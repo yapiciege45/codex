@@ -20,8 +20,7 @@ const questionSchema = new Schema({
 const Question = mongoose.model('Question', questionSchema);
 
 const configuration = new Configuration({
-  organization: "org-nPBBuxo75dlipaYrGVGVyoiS",
-  apiKey: "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",
+  apiKey: "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",
 });
 
 const openai = new OpenAIApi(configuration);
@@ -83,7 +82,7 @@ app.post('/', async (req, res) => {
       model: "text-davinci-003",
       prompt: `${prompt}`,
       temperature: 0, // Higher values means the model will take more risks.
-      max_tokens: 7, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
+      max_tokens: 2048, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
     });
 
     console.log({
