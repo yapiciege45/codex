@@ -20,7 +20,7 @@ const questionSchema = new Schema({
 const Question = mongoose.model('Question', questionSchema);
 
 const configuration = new Configuration({
-  apiKey: "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",
+  apiKey: "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",
 });
 
 const openai = new OpenAIApi(configuration);
@@ -78,34 +78,23 @@ app.post('/', async (req, res) => {
   try {
     const prompt = req.body.prompt;
 
-    /*const response = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: `${prompt}`,
-      temperature: 0, // Higher values means the model will take more risks.
-      max_tokens: 3000, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
-      top_p: 1, // alternative to sampling with temperature, called nucleus sampling
-      frequency_penalty: 0.5, // Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
-      presence_penalty: 0, // Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
-    });*/
-
-    const response = await fetch('https://api.openai.com/v1/completions', {
+    const response = fetch('https://api.openai.com/v1/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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'
+        'Authorization': 'Bearer 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'
       },
-      body: {
-        model: "text-davinci-3000",
+      body: JSON.stringify({
+        model: "text-davinci-003",
         prompt: `${prompt}`,
         max_tokens: 3000,
         temperature: 0
-      }
+      })
+    }).then(res => res.json()).then(data => {
+      res.status(200).send({
+        bot: data.choices[0].text
+      });
     })
-
-    res.status(200).send({
-      bot: response.data.choices[0].text
-    });
-
   } catch (error) {
     res.status(500).send({error});
   }
@@ -125,4 +114,4 @@ app.put('/question', async (req, res) => {
   
 })
 
-app.listen(5000, () => console.log('AI server started on http://localhost:5000'))
+app.listen(5000, () => console.log('AI server started on https://codex-vinn.onrender.com'))
