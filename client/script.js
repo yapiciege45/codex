@@ -8,6 +8,7 @@ const backdrop = document.querySelector('#backdrop')
 const closeModal = document.querySelector('#closeModal')
 let createChatBtn = document.querySelector('#create-chat')
 const sidebar = document.querySelector('#sidebar')
+const bar = document.querySelector('#bar')
 
 let loadInterval
 
@@ -197,6 +198,15 @@ createSohbetForm.addEventListener('submit', async () => {
             title: document.querySelector('#createFormValue').value
         })
     })
+})
+
+bar.addEventListener('click', () => {
+    if(sidebar.style.left !== '0px') {
+        sidebar.style.left = '0px';
+    }else {
+        sidebar.style.left = '-1000px';
+    }
+    
 })
 
 
