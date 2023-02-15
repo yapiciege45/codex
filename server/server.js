@@ -20,7 +20,7 @@ const questionSchema = new Schema({
 const Question = mongoose.model('Question', questionSchema);
 
 const configuration = new Configuration({
-  apiKey: "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",
+  apiKey: "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",
 });
 
 const openai = new OpenAIApi(configuration);
