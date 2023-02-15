@@ -77,7 +77,7 @@ app.delete('/question', async (req, res) => {
   
 })
 
-app.post('/', async (req, res) => {
+app.post('/api/', async (req, res) => {
   try {
     const prompt = req.body.prompt;
 

@@ -117,7 +117,7 @@ const handleSubmit = async (e) => {
     // messageDiv.innerHTML = "..."
     loader(messageDiv)
 
-    const response = await fetch(`https://codex-vinn.onrender.com`, {
+    const response = await fetch(`https://codex-vinn.onrender.com/api`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
