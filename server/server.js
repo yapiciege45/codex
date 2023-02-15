@@ -20,7 +20,7 @@ const questionSchema = new Schema({
 const Question = mongoose.model('Question', questionSchema);
 
 const configuration = new Configuration({
-  apiKey: "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",
+  apiKey: "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",
 });
 
 const openai = new OpenAIApi(configuration);
@@ -78,15 +78,29 @@ app.post('/', async (req, res) => {
   try {
     const prompt = req.body.prompt;
 
-    const response = await openai.createCompletion({
+    /*const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `${prompt}`,
       temperature: 0, // Higher values means the model will take more risks.
       max_tokens: 3000, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
-      top_p: 1,
-      frequency_penalty: 0.5,
-      presence_penalty: 0
-    });
+      top_p: 1, // alternative to sampling with temperature, called nucleus sampling
+      frequency_penalty: 0.5, // Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+      presence_penalty: 0, // Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+    });*/
+
+    const response = await fetch('https://api.openai.com/v1/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer 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'
+      },
+      body: {
+        model: "text-davinci-3000",
+        prompt: `${prompt}`,
+        max_tokens: 3000,
+        temperature: 0
+      }
+    })
 
     res.status(200).send({
       bot: response.data.choices[0].text
