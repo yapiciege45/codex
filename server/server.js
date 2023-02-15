@@ -20,7 +20,7 @@ const questionSchema = new Schema({
 const Question = mongoose.model('Question', questionSchema);
 
 const configuration = new Configuration({
-  apiKey: "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",
+  apiKey: "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",
 });
 
 const openai = new OpenAIApi(configuration);
@@ -82,7 +82,7 @@ app.post('/', async (req, res) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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'
+        'Authorization': 'Bearer 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'
       },
       body: JSON.stringify({
         model: "text-davinci-003",
@@ -91,7 +91,6 @@ app.post('/', async (req, res) => {
         temperature: 0
       })
     }).then(res => res.json()).then(data => {
-      console.log(data)
       res.status(200).send({
         bot: data.choices[0].text
       });
