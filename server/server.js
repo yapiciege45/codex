@@ -4,7 +4,7 @@ import { Configuration, OpenAIApi } from 'openai'
 import mongoose from 'mongoose'
 const { Schema } = mongoose;
 
-mongoose.connect("mongodb+srv://egeyapici:lnhqPnXcw5L0eBUB@cluster0.yefotpq.mongodb.net/chatgpt?retryWrites=true&w=majority",(err) => {
+mongoose.connect("mongodb+srv://egeyapici:lnhqPnXcw5L0eBUB@cluster1.v95cm8k.mongodb.net/chatgpt?retryWrites=true&w=majority",(err) => {
   if(err) {
     console.log(err)
   }else {
