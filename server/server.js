@@ -91,6 +91,7 @@ app.post('/', async (req, res) => {
         temperature: 0
       })
     }).then(res => res.json()).then(data => {
+      console.log(data)
       res.status(200).send({
         bot: data.choices[0].text
       });
