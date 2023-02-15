@@ -1,10 +1,13 @@
 import express from 'express'
 import cors from 'cors'
+import * as dotenv from 'dotenv'
 import { Configuration, OpenAIApi } from 'openai'
 import mongoose from 'mongoose'
 const { Schema } = mongoose;
 
-mongoose.connect("mongodb+srv://egeyapici:lnhqPnXcw5L0eBUB@cluster1.v95cm8k.mongodb.net/chatgpt?retryWrites=true&w=majority",(err) => {
+dotenv.config()
+
+mongoose.connect(process.env.MONGODB_URL,(err) => {
   if(err) {
     console.log(err)
   }else {
@@ -82,7 +85,7 @@ app.post('/', async (req, res) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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'
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
         model: "text-davinci-003",
@@ -91,6 +94,7 @@ app.post('/', async (req, res) => {
         temperature: 0
       })
     }).then(res => res.json()).then(data => {
+      console.log(data)
       res.status(200).send({
         bot: data.choices[0].text
       });
