@@ -18,7 +18,7 @@ window.onload = (e) => {
 }
 
 const loadChatBoxs = async () => {
-    const response = await fetch(`http://localhost:5000/sidebar`).then(res => res.json())
+    const response = await fetch(`https://codex-vinn.onrender.com/sidebar`).then(res => res.json())
     for (let i = 0; i < response.questions.length; i++) {
         const q = response.questions[i];
         const chatbox = `
@@ -116,7 +116,7 @@ const handleSubmit = async (e) => {
     // messageDiv.innerHTML = "..."
     loader(messageDiv)
 
-    const response = await fetch(`http://localhost:5000`, {
+    const response = await fetch(`https://codex-vinn.onrender.com`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -166,7 +166,7 @@ const showModal = () => {
 window.showModal = showModal
 
 const deleteQuestion = async (id) => {
-    const response = await fetch(`http://localhost:5000/question`, {
+    const response = await fetch(`https://codex-vinn.onrender.com/question`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ window.deleteQuestion = deleteQuestion
 
 
 createSohbetForm.addEventListener('submit', async () => {
-    const response = await fetch(`http://localhost:5000/create`, {
+    const response = await fetch(`https://codex-vinn.onrender.com/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -204,7 +204,7 @@ const changeChat = async (id) => {
     current_id = id
     chatContainer.innerHTML = ""
     let question
-    const res = await fetch(`http://localhost:5000/question/${id}`).then(res => res.json()).then(data => {question = data.questions})
+    const res = await fetch(`https://codex-vinn.onrender.com/question/${id}`).then(res => res.json()).then(data => {question = data.questions})
     console.log(question)
     for (let i = 0; i < question.length; i++) {
         const element = question[i];
@@ -215,7 +215,7 @@ const changeChat = async (id) => {
 }
 
 const saveQuestion = async (q, a) => {
-    const response = await fetch(`http://localhost:5000/question`, {
+    const response = await fetch(`https://codex-vinn.onrender.com/question`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
